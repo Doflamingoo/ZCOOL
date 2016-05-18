@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+        *{margin:0;padding:0;list-style:none;}
+        .warp{width:1083px;height:350px;margin:60px auto;position:relative;}
+        .warp ul li{width:1083px;height:350px;position:absolute;left:0;top:0;display:none;}
+        .btnL{position:absolute;top:175px;left:-40px;cursor:pointer;}
+        .btnR{position:absolute;top:175px;right:-40px;cursor:pointer;}
+    </style>
+	<script src="js/jquery-1.11.3.js"></script>
+	<script>
+        $(function(){
+            var timer;
+            var index=0;
+            $('.warp>ul>li').eq(0).fadeIn(1000).siblings().fadeOut(1000);
+            function move(){
+               index++;
+               //console.log(index);
+               $('.warp>ul>li').eq(index).fadeIn(1000).siblings().fadeOut(1000);
+               
+                if(index>=$('.warp>ul>li').length-1){
+                    index=-1;
+                }
+            }
+            timer=setInterval(move,2000);
+            $('.btnL').mouseover(function(){
+                clearInterval(timer);
+            })
+            $('.btnL').click(function(){
+                index--;
+                if(index<0){
+                    index=3;
+                }
+                console.log(index);
+                $('.warp>ul>li').eq(index).fadeIn(1000).siblings().fadeOut(1000);
+            })
+            $('.btnL').mouseout(function(){
+                timer=setInterval(move,2000);
+            })
+            $('.btnR').mouseover(function(){
+                clearInterval(timer);
+            })
+            $('.btnR').click(function(){
+                move();
+            })
+            $('.btnR').mouseout(function(){
+                timer=setInterval(move,2000);
+            })
+        })
+    </script>
+</head>
+<body>
+	<div class="warp">
+		<ul>
+			<li><img src="images/1.jpg" alt=""></li>
+			<li><img src="images/2.jpg" alt=""></li>
+			<li><img src="images/3.jpg" alt=""></li>
+			<li><img src="images/4.jpg" alt=""></li>
+		</ul>
+		<img src="images/sl.png" alt="" class="btnL">
+		<img src="images/sr.png" alt="" class="btnR">
+	</div>
+</body>
+</html>
